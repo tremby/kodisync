@@ -1,0 +1,15 @@
+{
+  "name": "kodisync",
+  "version": "0.0.1",
+  "description": "Sync playback on two instances of Kodi",
+  "main": "kodisync.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bart Nagel <bart@tremby.net>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "node-jsonrpc-client": "^1.0.3",
+    "yargs": "^16.1.1"
+  }
+}
