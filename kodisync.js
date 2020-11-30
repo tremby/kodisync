@@ -121,7 +121,7 @@ class Host {
 
 	async pause() {
 		const result = await this.getPlayerResult("Player.PlayPause", { "play": false });
-		this.speed = result.speed;
+		this.speed = 0;
 		this.syncState = {
 			state: "pause",
 			position: this.position,
