@@ -303,6 +303,14 @@ async function run() {
 	}
 }
 
+async function runAndReport(fn) {
+	try {
+		return fn();
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 // Handle command line arguments
 const argv = yargs(hideBin(process.argv))
 	.command("$0 <host...>", "Sync playback of Kodi instances", (yargs) => {
@@ -313,4 +321,4 @@ const argv = yargs(hideBin(process.argv))
 	})
 	.argv;
 
-run();
+runAndReport(run);
