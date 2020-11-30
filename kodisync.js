@@ -170,6 +170,11 @@ async function run() {
 			await host.updatePlayerId();
 			if (host.playerid) {
 				await host.updateStatus();
+			} else {
+				// Reset sync state
+				// FIXME: this should also be done when the
+				// video being played changes
+				host.syncState = null;
 			}
 		}));
 
