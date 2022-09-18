@@ -59,5 +59,10 @@ as arguments.
 
     node kodisync.js localhost my.friends.server:1234
 
+You can also use Docker:
+
+    sudo docker build -t kodisync .
+    sudo docker run --rm -it --init kodisync 172.17.0.1 my.friends.server:1234 #172.17.0.1 is the loopback IP address of docker.
+
 It will automatically add `http://` if no protocol is given,
 and will add `/jsonrpc` if no path is given.
