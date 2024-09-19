@@ -54,11 +54,25 @@ async function wait(ms) {
 function playingSameThing(hosts) {
 	if (hosts.length < 2) return true;
 	if (hosts.some((host) => host.playerid == null)) return false;
-	return !hosts.some((host, index) => {
-		if (index === 0) return false;
-		return host.currentItem.showtitle !== hosts[0].currentItem.showtitle
-			|| host.currentItem.season !== hosts[0].currentItem.season
-			|| host.currentItem.episode !== hosts[0].currentItem.episode;
+	return hosts.every((host, index) => {
+		if (index === 0) return true;
+
+		// Check if showtitle, season, and episode information is available (non-empty and not -1)
+		const showInfoAvailable = host.currentItem.showtitle && hosts[0].currentItem.showtitle
+			&& host.currentItem.season !== -1 && hosts[0].currentItem.season !== -1
+			&& host.currentItem.episode !== -1 && hosts[0].currentItem.episode !== -1;
+
+		// Check if showtitle, season, and episode match
+		const showMatches = host.currentItem.showtitle === hosts[0].currentItem.showtitle
+			&& host.currentItem.season === hosts[0].currentItem.season
+			&& host.currentItem.episode === hosts[0].currentItem.episode;
+
+		// Check if title or label matches
+		const titleOrLabelMatches = host.currentItem.title === hosts[0].currentItem.title
+			|| host.currentItem.label === hosts[0].currentItem.label;
+
+		// Use showMatches if showInfoAvailable, otherwise use titleOrLabelMatches
+		return showInfoAvailable ? showMatches : titleOrLabelMatches;
 	});
 }
 
@@ -157,7 +171,7 @@ class Host {
 		if (this.currentItem.showtitle) {
 			return `${this.currentItem.showtitle} ${pad(this.currentItem.season, 2)}x${pad(this.currentItem.episode, 2)}, "${this.currentItem.title}"`;
 		}
-		return this.currentItem.title;
+		return this.currentItem.title || this.currentItem.label;
 	}
 }
 

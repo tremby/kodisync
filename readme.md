@@ -5,7 +5,8 @@ This is a hacky Node script which attempts to sync playback
 of two or more Kodi instances.
 
 It will wait until all Kodi instances have the same TV show episode loaded
-(by matching show name, season number, episode number)
+(by matching show name, season number, episode number if available;
+otherwise media title or filename)
 and then pause everybody's playback
 and seek them all to the earliest position among the viewers.
 
