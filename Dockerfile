@@ -1,6 +1,6 @@
 FROM node:lts
-WORKDIR /tmp
+WORKDIR /src/
 COPY package* ./
 RUN npm ci
-COPY kodisync.js /tmp/kodisync.js
+COPY kodisync.js ./ 
 ENTRYPOINT ["node", "kodisync.js"]
